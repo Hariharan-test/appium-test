@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Java
         uses: actions/setup-java@v3
@@ -25,13 +25,15 @@ jobs:
         uses: android-actions/setup-android@v2
 
       - name: Make gradlew executable
-        run: chmod +x gradlew
+        run: |
+          chmod +x gradlew
+          ls -la gradlew
         shell: bash
 
       - name: Compile
         run: |
-          ./gradlew app:assembleDebug
-          ./gradlew app:assembleDebugAndroidTest
+          bash ./gradlew app:assembleDebug
+          bash ./gradlew app:assembleDebugAndroidTest
         shell: bash
 
       - name: Test espresso with saucectl

@@ -14,7 +14,7 @@ jobs:
       fail-fast: true
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - name: Setup java
         uses: actions/setup-java@v3
@@ -26,7 +26,9 @@ jobs:
         uses: android-actions/setup-android@v2
 
       - name: Make gradlew executable
-        run: chmod +x gradlew
+        run: |
+          chmod +x gradlew
+          ls -la gradlew
         shell: bash
 
       - name: Detect version from release tag
@@ -43,8 +45,8 @@ jobs:
 
       - name: Compile APK
         run: |
-          ./gradlew app:assembleDebug
-          ./gradlew app:assembleDebugAndroidTest
+          bash ./gradlew app:assembleDebug
+          bash ./gradlew app:assembleDebugAndroidTest
           mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/mda-${{ env.CI_TAG }}-${{ github.run_number }}.apk
           mv app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk app/build/outputs/apk/debug/mda-androidTest-${{ env.CI_TAG }}-${{ github.run_number }}.apk
         shell: bash
