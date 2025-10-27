@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 
 android {
+    namespace 'com.saucelabs.mydemoapp.android'
+    
     signingConfigs {}
 
     compileSdkVersion 31
@@ -54,7 +56,6 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
-    namespace 'com.saucelabs.mydemoapp.android'
     buildToolsVersion '30.0.3'
 
     signingConfigs {
