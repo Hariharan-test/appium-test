@@ -25,6 +25,10 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+        shell: bash
+
       - name: Detect version from release tag
         run: |
           echo "CI_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
