@@ -55,6 +55,7 @@ android {
         checkReleaseBuilds false
     }
     namespace 'com.example.mydemoapp'
+    buildToolsVersion '30.0.3'
 
     signingConfigs {
         debug {
