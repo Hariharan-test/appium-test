@@ -54,7 +54,7 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
-    namespace 'com.example.mydemoapp'
+    namespace 'com.saucelabs.mydemoapp.android'
     buildToolsVersion '30.0.3'
 
     signingConfigs {
