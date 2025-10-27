@@ -36,6 +36,21 @@ jobs:
           bash ./gradlew app:assembleDebugAndroidTest
         shell: bash
 
+      - name: Verify Sauce Labs credentials
+        run: |
+          if [ -z "$SAUCE_USERNAME" ] || [ -z "$SAUCE_ACCESS_KEY" ]; then
+            echo "❌ Sauce Labs credentials not set!"
+            echo "Please add SAUCE_USERNAME and SAUCE_ACCESS_KEY as GitHub secrets"
+            exit 1
+          else
+            echo "✅ Sauce Labs credentials are set"
+            echo "Username: ${SAUCE_USERNAME:0:3}***"
+          fi
+        shell: bash
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
       - name: Test espresso with saucectl
         uses: saucelabs/saucectl-run-action@v1
         with:
